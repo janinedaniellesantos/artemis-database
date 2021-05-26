@@ -13,7 +13,7 @@ function HandleError(response, reason, message, code){
 router.post('/', (request, response, next) => {
     let newTrip = request.body;
     //console.log(request.body);
-    if (!newTrip.tripName || !newTrip.tripDate || !newTrip.trashGallon()){
+    if (!newTrip.tripName || !newTrip.tripDate || !newTrip.trashGallon){
         HandleError(response, 'Missing Info', 'Form data missing', 500);
     }else{
         let trip = new TripSchema({
@@ -32,4 +32,32 @@ router.post('/', (request, response, next) => {
         });
     }
 });
+
+router.get('/', (request, response, next) => {
+    let tripName = request.query['tripName'];
+    if (tripName){
+        TripSchema
+            .find({"tripName": tripName})
+            .exec( (error, trips) => {
+                if (error){
+                    response.send({"error": error});
+                }else{
+                    response.send(trips);
+                }
+            });
+    }else{
+        TripSchema
+            .find()
+            .exec( (error, trips) => {
+                if (error){
+                    response.send({"error": error});
+                }else{
+                    response.send(trips);
+                }
+            });
+    }
+});
+
+
+    module.exports = router;
 

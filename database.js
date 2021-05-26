@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Update with your own Database URI
-const mongoDB = process.env.MONGODB_URI || 'mongodb+srv://janinesantos:netcentric@mongo-db-0.zqh3g.mongodb.net/people?retryWrites=true&w=majority';
+const mongoDB = process.env.MONGODB_URI || 'mongodb+srv://janinesantos:artemis@mongo-db-0.zqh3g.mongodb.net/myFirstDatabase?retryWrites=true"';
 
 mongoose
     .connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
