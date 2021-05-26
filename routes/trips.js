@@ -1,5 +1,6 @@
 let express = require('express');
 let router = express.Router();
+
 // For the Data Model
 let TripSchema = require('../models/trips');
 
