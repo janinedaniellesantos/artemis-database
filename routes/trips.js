@@ -58,6 +58,24 @@ router.get('/', (request, response, next) => {
     }
 });
 
+router.delete('/:tripName', (request, response, next) =>{
+    TripSchema
+        .findOne({"tripName": request.params.tripName}, (error, result)=>{
+            if (error) {
+                response.status(500).send(error);
+            }else if (result){
+                result.remove((error)=>{
+                    if (error){
+                        response.status(500).send(error);
+                    }
+                    response.send({"deleted trip": request.params.tripName});
+                });
+            }else{
+                response.status(404).send({"trip": request.params.tripName, "error":  "Not Found"});
+            }
+        });
+});
+
 
     module.exports = router;
 
